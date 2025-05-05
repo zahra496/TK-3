@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Masukkan notasi infix (gunakan spasi antar token, contoh: 5 + 4 / 5):");
+        String infix = sc.nextLine();
+
+        if (!InfixValidator.isValidInfix(infix)) {
+            System.out.println("Notasi infix tidak valid!");
+            return;
+        }
+
+        String postfix = InfixConverterArray.toPostfix(infix);
+        String prefix = InfixConverterArray.toPrefix(infix);
+
+        int hasilPostfix = PostfixEvaluator.evaluatePostfix(postfix);
+        int hasilPrefix = PostfixEvaluator.evaluatePrefix(prefix);
+
+        System.out.println("Postfix: " + postfix);
+        System.out.println("Hasil postfix: " + hasilPostfix);
+
+        System.out.println("Prefix: " + prefix);
+        System.out.println("Hasil prefix: " + hasilPrefix);
+    }
+}
