@@ -1,0 +1,24 @@
+public class InfixValidator {
+    public static boolean isValidInfix(String expr) {
+        String[] tokens = expr.trim().split("\\s+");
+        boolean expectOperand = true;
+
+        for (String token : tokens) {
+            if (expectOperand) {
+                if (!isOperand(token)) return false;
+            } else {
+                if (!isOperator(token)) return false;
+            }
+            expectOperand = !expectOperand;
+        }
+        return !expectOperand; // Harus diakhiri operand
+    }
+
+    private static boolean isOperand(String token) {
+        return token.matches("\\d+");
+    }
+
+    private static boolean isOperator(String token) {
+        return "+-*/".contains(token);
+    }
+}
